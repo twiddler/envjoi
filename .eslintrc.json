@@ -1,0 +1,35 @@
+{
+    "env": {
+        "browser": true,
+        "es2020": true,
+        "node": true
+    },
+    "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": 11
+    },
+    "plugins": ["@typescript-eslint"],
+    "rules": {
+        "quotes": ["warn", "single"],
+        "require-unicode-regexp": "warn",
+        "require-await": "warn",
+        "no-unused-expressions": "error",
+        "no-throw-literal": "warn",
+        "no-param-reassign": "error",
+        "no-shadow": "error",
+        "camelcase": "error",
+        "no-var": "error",
+        "prefer-const": "warn",
+        "@typescript-eslint/explicit-module-boundary-types": "off",
+        "@typescript-eslint/no-unused-vars": [
+            "warn",
+            {
+                "vars": "all",
+                "varsIgnorePattern": "^_",
+                "args": "all",
+                "argsIgnorePattern": "^_"
+            }
+        ]
+    }
+}

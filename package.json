@@ -1,0 +1,69 @@
+{
+    "name": "envjoi",
+    "version": "1.0.0",
+    "description": "Webpack plugin for using .env files and validating them with joi",
+    "main": "lib/index.js",
+    "scripts": {
+        "build": "npm-run-all build:*",
+        "build:clean": "rimraf lib",
+        "build:transpile": "babel src -d lib --extensions \".ts\"",
+        "build:types": "tsc",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "validate": "npm-run-all --parallel validate:*",
+        "validate:lint": "eslint src; prettier --check .",
+        "validate:dependencies": "check-outdated --columns name,current,wanted,latest,type,changes || true",
+        "prepublish": "npm-run-all validate build"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/twiddler/envjoi.git"
+    },
+    "author": "twiddler",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/twiddler/envjoi/issues"
+    },
+    "homepage": "https://github.com/twiddler/envjoi#readme",
+    "keywords": [
+        "webpack",
+        "plugin",
+        "dotenv",
+        "joi",
+        "process",
+        "env",
+        "process.env",
+        "environment",
+        "variables"
+    ],
+    "files": [
+        "lib"
+    ],
+    "peerDependencies": {
+        "webpack": "^4 || ^5"
+    },
+    "dependencies": {
+        "@babel/runtime": "^7.12.5"
+    },
+    "devDependencies": {
+        "@babel/cli": "^7.12.8",
+        "@babel/core": "^7.12.9",
+        "@babel/preset-env": "^7.12.7",
+        "@babel/preset-typescript": "^7.12.7",
+        "@types/joi": "^14.3.4",
+        "@types/node": "^14.14.9",
+        "@types/webpack": "^4.41.25",
+        "@typescript-eslint/eslint-plugin": "^4.8.1",
+        "@typescript-eslint/parser": "^4.8.1",
+        "babel-eslint": "^10.1.0",
+        "babel-loader": "^8.2.1",
+        "check-outdated": "^2.4.1",
+        "dotenv": "^8.2.0",
+        "eslint": "^7.14.0",
+        "joi": "^17.3.0",
+        "npm-run-all": "^4.1.5",
+        "prettier": "^2.2.0",
+        "ts-node": "^9.0.0",
+        "typescript": "^4.1.2",
+        "webpack": "^5.6.0"
+    }
+}
