@@ -6,7 +6,7 @@ Use `envjoi` to read and validate your environment variables from an `.env` file
 import { envjoi } from 'envjoi'
 
 const envSchema = Joi.object({
-    DEV_SERVER_PORT: Joi.string()
+    PORT: Joi.string()
         .regex(/^[0-9]+$/u)
         .default('8080'),
 })
@@ -42,7 +42,7 @@ const { foo, bar, baz } = process.env
 
 # Installation
 
-`npm install --save-dev envjoi`
+`npm install --save-dev @twiddler/envjoi`
 
 # API
 
