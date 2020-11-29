@@ -12,7 +12,7 @@ export function envjoi(schema: Joi.ObjectSchema, path = './.env') {
     return new DefinePlugin(prefixedVars)
 }
 
-function readFile(path) {
+function readFile(path: string) {
     try {
         return fs.readFileSync(path, 'utf8')
     } catch (err) {
