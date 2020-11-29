@@ -1,5 +1,5 @@
 {
-    "name": "envjoi",
+    "name": "@twiddler/envjoi",
     "version": "1.0.0",
     "description": "Webpack plugin for using .env files and validating them with joi",
     "main": "lib/index.js",
