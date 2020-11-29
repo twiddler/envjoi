@@ -4,20 +4,30 @@ import * as Joi from 'joi'
 import { DefinePlugin } from 'webpack'
 
 export function envjoi(schema: Joi.ObjectSchema, path = './.env') {
-    const vars = parse(path)
+    const fileContent = readFile(path)
+    const vars = parse(fileContent)
     const validVars = validate(schema, vars)
     const prefixedVars = prefix(validVars)
     dotenv.config({ path })
     return new DefinePlugin(prefixedVars)
 }
 
-function parse(path: string) {
+function readFile(path) {
     try {
-        const file = fs.readFileSync(path, 'utf8')
-        return dotenv.parse(file)
+        return fs.readFileSync(path, 'utf8')
     } catch (err) {
-        console.warn(`Error while trying to parse ${path}: ${err}`)
-        return {}
+        if (err.code === 'ENOENT') throw new Error('File was not found')
+        throw err
+    }
+}
+
+function parse(fileContent: string) {
+    try {
+        return dotenv.parse(fileContent)
+    } catch (err) {
+        throw new Error(
+            `Error while trying to parse the file with dotenv ${err}`
+        )
     }
 }
 
