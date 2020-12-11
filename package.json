@@ -1,6 +1,6 @@
 {
     "name": "@twiddler/envjoi",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "Webpack plugin for using .env files and validating them with joi",
     "main": "lib/index.js",
     "scripts": {
@@ -12,7 +12,7 @@
         "validate": "npm-run-all --parallel validate:*",
         "validate:lint": "eslint src; prettier --check .",
         "validate:dependencies": "check-outdated --columns name,current,wanted,latest,type,changes || true",
-        "prepublish": "npm-run-all validate build"
+        "prepack": "npm-run-all validate build"
     },
     "repository": {
         "type": "git",
