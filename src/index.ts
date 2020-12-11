@@ -38,5 +38,5 @@ function prefix(vars: Record<string, string> = {}) {
         return obj
     }, {})
 
-    return { 'process.env': vars, ...prefixed }
+    return { 'process.env': JSON.stringify(vars), ...prefixed }
 }
