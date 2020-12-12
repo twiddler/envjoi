@@ -7,7 +7,7 @@ export function envjoi(schema: Joi.ObjectSchema, path = './.env') {
     const vars = parse(path)
     const validVars = validate(schema, vars)
     const prefixedVars = prefix(validVars)
-    dotenv.config({ path })
+    setEnvironmentVariables(validVars)
     return new DefinePlugin(prefixedVars)
 }
 
@@ -39,4 +39,8 @@ function prefix(vars: Record<string, string> = {}) {
     }, {})
 
     return { ...prefixed, 'process.env': JSON.stringify(vars) }
+}
+
+function setEnvironmentVariables(validVars) {
+    process.env = { ...process.env, ...validVars }
 }
