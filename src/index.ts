@@ -1,32 +1,51 @@
 import * as dotenv from 'dotenv'
-import * as fs from 'fs'
 import * as Joi from 'joi'
+import { resolve } from 'path'
 import { DefinePlugin } from 'webpack'
 
-export function envjoi(schema: Joi.ObjectSchema, path = './.env') {
-    const vars = parse(path)
-    const validVars = validate(schema, vars)
-    const prefixedVars = prefix(validVars)
+export function envjoi(
+    schema: Joi.ObjectSchema,
+    path = resolve(process.cwd(), '.env')
+) {
+    // Add environment variables from .env file to process.env
+    config(path)
+
+    // Validate and set defaults
+    const validVars = validate(schema)
     setEnvironmentVariables(validVars)
+
+    // Return webpack plugin
+    const prefixedVars = prefix(validVars)
     return new DefinePlugin(prefixedVars)
 }
 
-function parse(path: string) {
+function config(path: string) {
     try {
-        const file = fs.readFileSync(path, 'utf8')
-        return dotenv.parse(file)
-    } catch (err) {
-        console.warn(`Error while trying to parse ${path}: ${err}`)
-        return {}
+        const { error } = dotenv.config({ path })
+        if (error) throw error
+    } catch (error) {
+        if (error.code === 'ENOENT') {
+            // .env file is not required
+            console.warn(`Could not find ${path}: ${error}`)
+            return {}
+        } else {
+            // .env file must be parsable
+            throw error
+        }
     }
 }
 
-function validate(schema: Joi.ObjectSchema, vars: Record<string, string>) {
-    const { error, value } = schema.validate(vars)
+function validate(schema: Joi.ObjectSchema) {
+    // dotenv.parse(file) only returns those environment variables that were defined in that file. However, some environment variables might already be exported and not supplied through the .env file. To also validate those, we validate process.env after parsing instead of what dotenv.parse(file) returns. Exposing undescribed environment variables to the app poses a security risk, so we strip those.
+    const { error, value } = schema
+        .unknown()
+        .validate(process.env, { stripUnknown: true })
+
     if (error)
         throw new Error(
             `Error while validating environment variables: ${error.message}`
         )
+
     return value
 }
 
@@ -41,6 +60,6 @@ function prefix(vars: Record<string, string> = {}) {
     return { ...prefixed, 'process.env': JSON.stringify(vars) }
 }
 
-function setEnvironmentVariables(validVars) {
-    process.env = { ...process.env, ...validVars }
+function setEnvironmentVariables(vars: Record<string, string>) {
+    process.env = { ...process.env, ...vars }
 }
