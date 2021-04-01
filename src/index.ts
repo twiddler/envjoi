@@ -50,14 +50,12 @@ function validate(schema: Joi.ObjectSchema) {
 }
 
 function prefix(vars: Record<string, string> = {}) {
-    const prefixed = Object.entries(vars).reduce(function (obj, [key, value]) {
+    return Object.entries(vars).reduce(function (obj, [key, value]) {
         // From webpack.DefinePlugin docs: "Note that because the plugin does a direct text replacement, the value given to it must include actual quotes inside of the string itself."
         obj[`process.env.${key}`] = JSON.stringify(value)
 
         return obj
     }, {})
-
-    return { ...prefixed, 'process.env': JSON.stringify(vars) }
 }
 
 function setEnvironmentVariables(vars: Record<string, string>) {

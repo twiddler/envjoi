@@ -28,17 +28,21 @@ You can access a single environment variable ...
 const FOO = process.env.FOO
 ```
 
-... or all at once ...
+# Can I use or destructure `process.env` directly?
+
+No. We use webpack's `DefinePlugin` to replace occurrences of `process.env.FOO` in your code with the value of `FOO` as defined in your `.env` file. To support something like
 
 ```js
 const env = process.env
 ```
 
-... or destructure what you need ...
+or
 
 ```js
-const { foo, bar, baz } = process.env
+const { FOO, BAR, BAZ } = process.env
 ```
+
+we would need to replace all occurrences of `process.env` with everything you put in your `.env`, **including secrets** you do not want in your finished builds. To protect you from accidentally exposing your secrets, `envjoi` does not support destructuring.
 
 # Installation
 
@@ -51,10 +55,6 @@ const { foo, bar, baz } = process.env
 -   `schema` of your environment variables defined with `Joi`
 -   `path` to your `.env` file (default to `./.env`)
 -   returns an instance of `webpack.DefinePlugin`
-
-# Limitations
-
-You can only use strings in your `schema`. Use regular expressions to allow only numbers and parse to your desired types when needed.
 
 # Contributors
 
