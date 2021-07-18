@@ -1,6 +1,6 @@
 {
     "name": "@twiddler/envjoi",
-    "version": "3.0.0",
+    "version": "3.0.1",
     "description": "Webpack plugin for using .env files and validating them with joi",
     "main": "lib/index.js",
     "scripts": {
@@ -8,7 +8,7 @@
         "build:clean": "rimraf lib",
         "build:transpile": "babel src -d lib --extensions \".ts\"",
         "build:types": "tsc",
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "test": "echo \"Info: no test specified\"",
         "validate": "npm-run-all --parallel validate:*",
         "validate:lint": "eslint src; prettier --check .",
         "validate:dependencies": "check-outdated --columns name,current,wanted,latest,type,changes || true",
