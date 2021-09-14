@@ -24,7 +24,7 @@ function config(path: string) {
         const { error } = dotenv.config({ path })
         if (error) throw error
     } catch (error) {
-        if (error.code === 'ENOENT') {
+        if ((error as any).code === 'ENOENT') {
             // .env file is not required
             console.warn(`Could not find ${path}: ${error}`)
             return {}
@@ -51,6 +51,9 @@ function validate(schema: Joi.ObjectSchema) {
 
 function prefix(vars: Record<string, string> = {}) {
     return Object.entries(vars).reduce(function (obj, [key, value]) {
+        // Webpack 5 does not polyfill `process` anymore, so we need to do it ourselves. See https://webpack.js.org/migrate/5/#run-a-single-build-and-follow-advice
+        obj['process.env'] = JSON.stringify({ env: {} })
+
         // From webpack.DefinePlugin docs: "Note that because the plugin does a direct text replacement, the value given to it must include actual quotes inside of the string itself."
         obj[`process.env.${key}`] = JSON.stringify(value)
 
