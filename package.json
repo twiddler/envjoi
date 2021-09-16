@@ -8,7 +8,7 @@
         "build:clean": "rimraf lib",
         "build:transpile": "babel src -d lib --extensions \".ts\"",
         "build:types": "tsc",
-        "test": "echo \"Info: no test specified\"",
+        "test": "jest",
         "validate": "npm-run-all --parallel validate:*",
         "validate:lint": "eslint src; prettier --check .",
         "validate:dependencies": "check-outdated --columns package,current,wanted,latest,type,changes || true",
@@ -51,6 +51,7 @@
         "@babel/core": "^7.12.9",
         "@babel/preset-env": "^7.12.7",
         "@babel/preset-typescript": "^7.12.7",
+        "@types/jest": "^27.0.1",
         "@types/joi": "^17.2.3",
         "@types/node": "^16.9.1",
         "@types/webpack": "^5.28.0",
@@ -60,8 +61,10 @@
         "babel-loader": "^8.2.1",
         "check-outdated": "^2.4.1",
         "eslint": "^7.14.0",
+        "jest": "^27.2.0",
         "npm-run-all": "^4.1.5",
         "prettier": "^2.2.0",
+        "ts-jest": "^27.0.5",
         "typescript": "^4.1.2",
         "webpack": "^5.6.0"
     }
