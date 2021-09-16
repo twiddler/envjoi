@@ -1,20 +1,30 @@
-Use `envjoi` to read and validate your environment variables from an `.env` file and make them available in your finished build as well!
+Use `envjoi` to read, validate and use environment variables from an `.env` file when building with webpack and in your finished build as well!
 
-# Example webpack configuration
+# Example usage
 
 ```ts
+// webpack.config.ts
+
 import { envjoi } from 'envjoi'
 
 const envSchema = Joi.object({
-    PORT: Joi.string()
-        .regex(/^[0-9]+$/u)
-        .default('8080'),
+    PORT: Joi.number().greater(0).default(8080),
+    PUBLIC_PATH: Joi.string().required(),
 })
 
 const envjoiPlugin = envjoi(envSchema)
 
 const configuration: webpack.Configuration = {
+    output: {
+        // Use all environment variables including
+        // those from .env in your webpack config
+        publicPath: process.env.PUBLIC_PATH,
+    },
+
     plugins: [
+        // Only expose environment variables
+        // validated against your Joi schema in
+        // your builds.
         envjoiPlugin,
     ],
     ...
