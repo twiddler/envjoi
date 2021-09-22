@@ -12,7 +12,8 @@
         "validate": "npm-run-all --parallel validate:*",
         "validate:lint": "eslint src; prettier --check .",
         "validate:dependencies": "check-outdated --columns package,current,wanted,latest,type,changes || true",
-        "prepack": "npm-run-all validate build"
+        "prepack": "npm-run-all validate build",
+        "prepublishOnly": "npm run test"
     },
     "repository": {
         "type": "git",
