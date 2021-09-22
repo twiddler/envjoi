@@ -5,13 +5,17 @@ on:
         branches: [main]
 
 jobs:
-    publish:
+    test:
         runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                node: ['12', '14', '16']
+        name: Test with Node v${{ matrix.node }}
         steps:
             - uses: actions/checkout@v2
             - uses: actions/setup-node@v2
               with:
-                  node-version: 14
+                  node-version: ${{ matrix.node }}
                   cache: npm
                   cache-dependency-path: '**/package-lock.json'
             - run: npm ci
