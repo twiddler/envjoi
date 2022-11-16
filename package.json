@@ -1,74 +1,72 @@
 {
-    "name": "@twiddler/envjoi",
-    "version": "6.0.0",
-    "description": "Webpack plugin for using .env files and validating them with joi",
-    "main": "lib/index.js",
-    "scripts": {
-        "build": "npm-run-all build:*",
-        "build:clean": "rimraf lib",
-        "build:transpile": "babel src -d lib --extensions \".ts\"",
-        "build:types": "tsc",
-        "test": "jest",
-        "validate": "npm-run-all --parallel validate:*",
-        "validate:lint": "eslint src; prettier --check .",
-        "validate:dependencies": "check-outdated --columns package,current,wanted,latest,type,changes || true",
-        "prepack": "npm-run-all validate build",
-        "prepublishOnly": "npm run test"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/twiddler/envjoi.git"
-    },
-    "author": "twiddler",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/twiddler/envjoi/issues"
-    },
-    "homepage": "https://github.com/twiddler/envjoi#readme",
-    "keywords": [
-        "webpack",
-        "plugin",
-        "dotenv",
-        "joi",
-        "process",
-        "env",
-        "process.env",
-        "environment",
-        "variables"
-    ],
-    "files": [
-        "lib"
-    ],
-    "engines": {
-        "node": "^14 || ^16  || ^18"
-    },
-    "peerDependencies": {
-        "webpack": "^4 || ^5"
-    },
-    "dependencies": {
-        "@babel/runtime": "^7.12.5",
-        "dotenv": "^16.0.1",
-        "joi": "^17.3.0"
-    },
-    "devDependencies": {
-        "@babel/cli": "^7.12.8",
-        "@babel/core": "^7.12.9",
-        "@babel/eslint-parser": "^7.17.0",
-        "@babel/preset-env": "^7.12.7",
-        "@babel/preset-typescript": "^7.12.7",
-        "@types/jest": "^28.1.6",
-        "@types/node": "^18.6.1",
-        "@types/webpack": "^5.28.0",
-        "@typescript-eslint/eslint-plugin": "^5.6.0",
-        "@typescript-eslint/parser": "^5.6.0",
-        "babel-loader": "^8.2.1",
-        "check-outdated": "^2.4.1",
-        "eslint": "^8.4.1",
-        "jest": "^28.1.3",
-        "npm-run-all": "^4.1.5",
-        "prettier": "^2.2.0",
-        "ts-jest": "^28.0.7",
-        "typescript": "^4.1.2",
-        "webpack": "^5.6.0"
-    }
+  "name": "@twiddler/envjoi",
+  "version": "6.0.1",
+  "description": "Webpack plugin for using .env files and validating them with joi",
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "npm-run-all build:*",
+    "build:clean": "rimraf lib",
+    "build:transpile": "babel src -d lib --extensions \".ts\"",
+    "build:types": "tsc",
+    "test": "jest",
+    "validate": "npm-run-all --parallel validate:*",
+    "validate:lint": "eslint src; prettier --check .",
+    "validate:dependencies": "check-outdated --columns package,current,wanted,latest,type,changes || true",
+    "prepack": "npm-run-all validate build",
+    "prepublishOnly": "npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/twiddler/envjoi.git"
+  },
+  "author": "twiddler",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/twiddler/envjoi/issues"
+  },
+  "homepage": "https://github.com/twiddler/envjoi#readme",
+  "keywords": [
+    "webpack",
+    "plugin",
+    "dotenv",
+    "joi",
+    "process",
+    "env",
+    "process.env",
+    "environment",
+    "variables"
+  ],
+  "files": ["lib"],
+  "engines": {
+    "node": "^14 || ^16  || ^18"
+  },
+  "peerDependencies": {
+    "webpack": "^4 || ^5"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.12.5",
+    "dotenv": "^16.0.1",
+    "joi": "^17.3.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.12.8",
+    "@babel/core": "^7.12.9",
+    "@babel/eslint-parser": "^7.17.0",
+    "@babel/preset-env": "^7.12.7",
+    "@babel/preset-typescript": "^7.12.7",
+    "@types/jest": "^28.1.6",
+    "@types/node": "^18.6.1",
+    "@types/webpack": "^5.28.0",
+    "@typescript-eslint/eslint-plugin": "^5.6.0",
+    "@typescript-eslint/parser": "^5.6.0",
+    "babel-loader": "^8.2.1",
+    "check-outdated": "^2.4.1",
+    "eslint": "^8.4.1",
+    "jest": "^28.1.3",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.2.0",
+    "ts-jest": "^28.0.7",
+    "typescript": "^4.1.2",
+    "webpack": "^5.6.0"
+  }
 }
