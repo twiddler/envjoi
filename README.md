@@ -1,3 +1,11 @@
+> **Warning**
+>
+> **I have stopped maintaining this project.**
+>
+> I started using [vite](https://github.com/vitejs/vite) and because of that haven't used webpack in a while. I do not think I will be moving back to webpack.
+>
+> I am archiving this project for now. I will delete it at the end of 2023. Please save yourself a copy.
+
 Use `envjoi` to read, validate and use environment variables from an `.env` file when building with webpack and in your finished build as well!
 
 # Example usage
